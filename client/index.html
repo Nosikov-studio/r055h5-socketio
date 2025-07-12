@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client socket</title>
+</head>
+<body>
+<p>********************код из проекта h4**************************************</p>
+    <h1>hellllloooo!!!!!!!!!!!!!!!!!!!!</h1>
+<header>
+    <ul class="messages"> 
+        <!-- <li> Сообщение 1 </li>
+        <li> Сообщение 2 </li>
+        <li> Сообщение 3 </li> -->
+    
+    </ul>
+
+    <form  class="form">
+
+        <div class="name"> </div>
+        <input type="text" class="input" autocomplete="off">
+        <button class="btn">Отправить</button>
+    </form>
+<p>**********************************************************</p>    
+
+
+
+
+
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+
+
+    <script>
+
+       // const socket = io('http://localhost:3000/');
+       const socket = io('http://truruki.ru/');
+
+ //*****************код из проекта h4************************************
+const messages = document.querySelector('.messages');
+const form = document.querySelector('.form');
+const input = document.querySelector('.input');
+const nameBlock = document.querySelector('.name');
+
+const userName = prompt('Ваше имя:');
+nameBlock.innerHTML = `${userName}`;
+
+form.addEventListener('submit', (e)=> {
+    e.preventDefault();
+
+    if (input.value) {
+        socket.emit('chat message', {
+            message: input.value, 
+            name: userName
+        })
+        input.value =''
+    }
+})
+
+
+socket.on('chat message', (data) => {
+    const item = document.createElement('li')
+    item.innerHTML =`<span>${data.name} </span>: ${data.message}`
+    messages.appendChild(item)
+    window.scrollTo(0, document.body.scrollHeight)
+})
+
+//*****************************************************
+
+    </script>
+</body>
+</html>
