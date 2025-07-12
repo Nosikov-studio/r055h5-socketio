@@ -43,7 +43,8 @@ jobs:
         script: |
            rm -rf /var/www/ws/.git/
            rm -rf /var/www/ws/.github/
-           rm  /var/www/ws/.gitignore        
+           rm  /var/www/ws/.gitignore
+           reboot        
            cd /var/www/ws/server/
            
            pm2 restart websocket --update-env 
