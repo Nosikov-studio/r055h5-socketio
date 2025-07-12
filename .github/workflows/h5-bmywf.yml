@@ -44,10 +44,14 @@ jobs:
            rm -rf /var/www/ws/.git/
            rm -rf /var/www/ws/.github/
            rm  /var/www/ws/.gitignore           
-           cd /var/www/ws/server/
+           cd /var/www/ws/server/.
+
+           pm2 delete websocket || true
+           pm2 start server.js --name websocket --watch --update-env
+           pm2 save
            
-           pm2 restart websocket --update-env 
-           pm2 reload websocket
+          #  pm2 restart websocket --update-env 
+          #  pm2 reload websocket
            
            
           # pm2 describe backend || pm2 start index.js --name backend --watch 
