@@ -47,7 +47,7 @@ jobs:
            cd /var/www/ws/server/.
 
            pm2 delete websocket || true
-           pm2 start server.js --name websocket --watch --update-env
+           pm2 start /var/www/ws/server/server.js --name websocket
            pm2 save
            
           #  pm2 restart websocket --update-env 
